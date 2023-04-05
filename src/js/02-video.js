@@ -15,7 +15,10 @@ player.getVideoTitle().then(function(title) {
     console.log('title:', title);
 });
 const onPlay = function(time) {
-    localStorage.setItem("videoplayer-current-time", time.seconds);
-    localStorage.getItem("videoplayer-current-time");
+    localStorage.setItem("videoplayer-current-time", JSON.stringify(time)).then(function(seconds){
+    localStorage.getItem("videoplayer-current-time")}).catch(function(error) {
+        console.log('mistake')
+    });
+
 };
     player.on('timeupdate', throttle((onPlay), 1000));
